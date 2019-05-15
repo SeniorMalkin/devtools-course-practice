@@ -12,42 +12,43 @@ std::string PolynomsCalculator::Info() {
     return res;
 };
 
-Monom PolynomsCalculator::createMonom(std::string& str) {
+Monom PolynomsCalculator::createMonom(const std::string& str) {
     double coeff = 1;
     std::map<char, double> vars;
     std::size_t res = 0;
     std::size_t curr = res;
+    std::string str1 = str.substr(0, str.length());
 
-    while ((isdigit(str[curr]) || str[curr] == '-' || str[curr] == '+' || str[curr] == '.') && (curr < str.length())) {
+    while ((isdigit(str1[curr]) || str1[curr] == '-' || str1[curr] == '+' || str1[curr] == '.') && (curr < str1.length())) {
         curr++;
     }
     if (curr > 0) {
-        coeff = std::stod(str.substr(res, curr));
+        coeff = std::stod(str1.substr(res, curr));
     }
-    str.erase(res, curr);
-    res = str.find('^');;
+    str1.erase(res, curr);
+    res = str1.find('^');;
     curr = res;
     while (res != std::string::npos) {
         curr++;
-        if (isdigit(str[curr]) || str[curr] == '-' || str[curr] == '+') {
-            while (isdigit(str[curr])) {
+        if (isdigit(str1[curr]) || str1[curr] == '-' || str1[curr] == '+') {
+            while (isdigit(str1[curr])) {
                 curr++;
             }
-            vars.insert({ str[res - 1],std::stod(str.substr(res + 1, curr - (res + 1))) });
-            str.erase(res, curr - res);
-            res = str.find('^');
+            vars.insert({ str1[res - 1],std::stod(str1.substr(res + 1, curr - (res + 1))) });
+            str1.erase(res, curr - res);
+            res = str1.find('^');
             curr = res;
         }
     }
     return Monom(coeff, vars);
 }
 
-bool PolynomsCalculator::checkCorrectPolynoms(std::string& str) {
+bool PolynomsCalculator::checkCorrectPolynoms(const std::string& str) {
     const std::regex reg_str("([+,-]?(([0-9]+.[0-9]+)?([a-z]\\^-?[0-9]+|[a-z])+|([0-9]+.[0-9]+)?))+");
     return std::regex_match(str, reg_str);
 };
 
-bool PolynomsCalculator::checkOperation(std::string& str) {
+bool PolynomsCalculator::checkOperation(const std::string& str) {
     if (str == "+" || str == "-" || str == "*") {
         return true;
     }
@@ -72,10 +73,10 @@ std::vector<Monom> PolynomsCalculator::parsePolynom( const std::string& str) {
     return resm;
 };
 
-std::string PolynomsCalculator::preprocessing(std::string& str) {
+std::string PolynomsCalculator::preprocessing(const std::string& str) {
     std::string str1 = str.substr(0, str.length());
 
-    for (int i = 0; i < str1.length() - 1; i++) {
+    for (int i = 0; i < (str1.length() - 1); i++) {
         if (isalpha(str1[i]) && (isalpha(str1[i + 1]) || str1[i + 1] == '+' || str1[i + 1] == '-')) {
             str1.insert(i+1, "^1");
         }
@@ -86,7 +87,7 @@ std::string PolynomsCalculator::preprocessing(std::string& str) {
     return str1;
 };
 
-std::string PolynomsCalculator::calculate(std::string& arg1, std::string& arg2, std::string& operation) {
+std::string PolynomsCalculator::calculate(const std::string& arg1,const std::string& arg2,const std::string& operation) {
     Polynom pol1(parsePolynom(preprocessing(arg1)));
     Polynom pol2(parsePolynom(preprocessing(arg2)));
     std::string op = operation;
