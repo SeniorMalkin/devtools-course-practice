@@ -3,10 +3,10 @@
 #ifndef MODULES_POLYNOMS_INCLUDE_POLYNOMS_CALCULATOR_H_
 #define MODULES_POLYNOMS_INCLUDE_POLYNOMS_CALCULATOR_H_
 
-#include "monom.h"
-
 #include <string>
 #include <vector>
+
+#include "monom.h"
 
 class PolynomsCalculator {
  public:

@@ -1,16 +1,18 @@
 // Copyright 2019 Malkin Danil
 
 #include "include/polynoms_calculator.h"
-#include "include/polynom.h"
 
 #include <regex>
 #include <iostream>
 
+#include "include/polynom.h"
+
 std::string PolynomsCalculator::Info() {
-    std::string res = "Please,enter the expression in the following format: \"*first polynom* *second polynom* *operation*\".\n";
-    res+= "Available operations: +,-,*.\n";
+    std::string res = "Please,enter the expression in the following format:";
+    res+=" \"*first polynom* *second polynom* *operation*\".\n";
+    res+= "Available operations: +, -, *.\n";
     return res;
-};
+}
 
 Monom PolynomsCalculator::createMonom(const std::string& str) {
     double coeff = 1;
@@ -76,7 +78,7 @@ std::vector<Monom> PolynomsCalculator::parsePolynom( const std::string& str) {
 std::string PolynomsCalculator::preprocessing(const std::string& str) {
     std::string str1 = str.substr(0, str.length());
 
-    for (int i = 0; i < (str1.length() - 1); i++) {
+    for (std::size_t i = 0; i < (str1.length() - 1); i++) {
         if (isalpha(str1[i]) && (isalpha(str1[i + 1]) || str1[i + 1] == '+' || str1[i + 1] == '-')) {
             str1.insert(i+1, "^1");
         }
