@@ -1,7 +1,7 @@
 // Copyright 2019 Malkin Danil
 
-#include "include\polynoms_calculator.h"
-#include "include\polynom.h"
+#include "include/polynoms_calculator.h"
+#include "include/polynom.h"
 
 #include <regex>
 #include <iostream>

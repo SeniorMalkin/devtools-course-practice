@@ -1,6 +1,6 @@
 // Copyright 2019 Malkin Danil
 
-#include "include\polynoms_calculator.h"
+#include "include/polynoms_calculator.h"
 
 #include <iostream>
 

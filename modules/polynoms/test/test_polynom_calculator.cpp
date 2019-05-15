@@ -8,7 +8,7 @@
 
 #include "include/monom.h"
 #include "include/polynom.h"
-#include "include\polynoms_calculator.h"
+#include "include/polynoms_calculator.h"
 
 using std::map;
 
