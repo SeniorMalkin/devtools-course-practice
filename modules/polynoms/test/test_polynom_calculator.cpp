@@ -527,7 +527,7 @@ TEST(PolynomTest, Calculator_Check_Summ) {
     std::string arg2 = "2.0y-3z";
 
     // Act
-    std::string res = calc.calculate(arg1,arg2,std::string("+"));
+    std::string res = calc.calculate(arg1,arg2, std::string("+"));
 
     // Assert
     EXPECT_EQ(res, p);
@@ -558,7 +558,7 @@ TEST(PolynomTest, Calculator_Check_Multiplication) {
     std::string res = calc.calculate(arg1, arg2, std::string("*"));
 
     // Assert
-    EXPECT_EQ(p,res);
+    EXPECT_EQ(p, res);
 }
 
 TEST(PolynomTest, Check_Brackets_Operator_Correct) {
@@ -569,9 +569,9 @@ TEST(PolynomTest, Check_Brackets_Operator_Correct) {
     v.push_back("3.0x^2");
     v.push_back("3.0y-3.0z");
     v.push_back("*");
-   
+
     // Act
-    std::string res = calc(3,&v.front());
+    std::string res = calc(3, &v.front());
 
     // Assert
     EXPECT_EQ(p, res);

@@ -24,7 +24,7 @@ Monom PolynomsCalculator::createMonom(const std::string& str) {
     std::size_t curr = res;
     std::string str1 = str.substr(0, str.length());
 
-    while ((isdigit(str1[curr]) || str1[curr] == '-' || 
+    while ((isdigit(str1[curr]) || str1[curr] == '-' ||
         str1[curr] == '+' || str1[curr] == '.') && (curr < str1.length())) {
         curr++;
     }
@@ -75,7 +75,7 @@ std::vector<Monom> PolynomsCalculator::parsePolynom(const std::string& str) {
     std::size_t curr = res;
 
     while (curr != str1.length()) {
-        if ((str1[curr] == '-' || str1[curr] == '+') && 
+        if ((str1[curr] == '-' || str1[curr] == '+') &&
             (isalpha(str1[curr - 1]) || isdigit(str1[curr - 1]))) {
             resm.push_back(createMonom(str1.substr(res, curr - res)));
             res = curr;
