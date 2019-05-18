@@ -527,7 +527,7 @@ TEST(PolynomTest, Calculator_Check_Summ) {
     std::string arg2 = "2.0y-3z";
 
     // Act
-    std::string res = calc.calculate(arg1,arg2, std::string("+"));
+    std::string res = calc.calculate(arg1, arg2, std::string("+"));
 
     // Assert
     EXPECT_EQ(res, p);
