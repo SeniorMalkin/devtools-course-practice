@@ -142,7 +142,7 @@ std::string PolynomsCalculator::calculate(const std::string& arg1,
             }
             return "Error";
     }
-    catch (std::invalid_argument e) {
+    catch (const std::invalid_argument& e) {
         return "Error";
     }
 }
