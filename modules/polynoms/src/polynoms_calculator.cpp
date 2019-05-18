@@ -2,7 +2,7 @@
 
 #include "include/polynoms_calculator.h"
 
-#include <regex>
+// #include <regex>
 #include <iostream>
 
 #include "include/polynom.h"

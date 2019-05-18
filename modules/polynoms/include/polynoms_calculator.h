@@ -13,7 +13,7 @@ class PolynomsCalculator {
      PolynomsCalculator() {
      }
     std::string operator()(int argc, const char** argv);
-    std::string calculate(const std::string& arg1, const std::string& arg2, 
+    std::string calculate(const std::string& arg1, const std::string& arg2,
         const std::string& op);
  private:
     std::string Info();
