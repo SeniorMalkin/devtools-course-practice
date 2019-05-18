@@ -42,7 +42,7 @@ Monom PolynomsCalculator::createMonom(const std::string& str) {
             curr = res;
         }
         else {
-            if (curr = res + 1) {
+            if (curr == res + 1) {
                 throw std::invalid_argument("Error");
             }
         }
