@@ -561,6 +561,22 @@ TEST(PolynomTest, Calculator_Check_Multiplication) {
     EXPECT_EQ(p, res);
 }
 
+TEST(PolynomTest, Check_Incorrect_Operation) {
+    // Arrange
+    PolynomsCalculator calc;
+    std::string p = "Incorrect input.";
+    std::vector<const char*> v;
+    v.push_back("3.0x^2");
+    v.push_back("3.0y-3.0z");
+    v.push_back("$");
+
+    // Act
+    std::string res = calc(3, &v.front());
+
+    // Assert
+    EXPECT_EQ(p, res);
+}
+
 TEST(PolynomTest, Check_Brackets_Operator_Correct) {
     // Arrange
     PolynomsCalculator calc;
