@@ -6,18 +6,19 @@
 #include <string>
 #include <vector>
 
-#include "monom.h"
+#include "include/monom.h"
 
 class PolynomsCalculator {
  public:
      PolynomsCalculator() {
-     };
+     }
     std::string operator()(int argc, const char** argv);
-    std::string calculate(const std::string& arg1,const std::string& arg2,const std::string& op);
+    std::string calculate(const std::string& arg1, const std::string& arg2, 
+        const std::string& op);
  private:
     std::string Info();
-    //Wait support std::regex and new configuration for environment of Linux
-    //bool checkCorrectPolynoms(const std::string& str);
+    // Wait support std::regex and new configuration for environment of Linux
+    // bool checkCorrectPolynoms(const std::string& str);
     bool checkOperation(const std::string& str);
     std::string preprocessing(const std::string& str);
     Monom createMonom(const std::string& str);

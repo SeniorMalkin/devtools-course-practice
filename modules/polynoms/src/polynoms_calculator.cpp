@@ -50,7 +50,7 @@ Monom PolynomsCalculator::createMonom(const std::string& str) {
     return Monom(coeff, vars);
 }
 
-//It wait new version gcc for TREVIS
+// It wait new version gcc for TREVIS
 /*
 bool PolynomsCalculator::checkCorrectPolynoms(const std::string& str) {
     const std::regex reg_str("([+,-]?(([0-9]+.[0-9]+)?([a-z]\\^-?[0-9]+|[a-z])+|([0-9]+.[0-9]+)?))+");
