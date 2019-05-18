@@ -9,8 +9,8 @@
 
 std::string PolynomsCalculator::Info() {
     std::string res = "Please,enter the expression in the following format:";
-    res+=" \"*first polynom* *second polynom* *operation*\".\n";
-    res+= "Available operations: +, -, *.\n";
+    res += " \"*first polynom* *second polynom* *operation*\".\n";
+    res += "Available operations: +, -, *.\n";
     return res;
 }
 
@@ -41,15 +41,22 @@ Monom PolynomsCalculator::createMonom(const std::string& str) {
             res = str1.find('^');
             curr = res;
         }
+        else {
+            if (curr = res + 1) {
+                throw std::invalid_argument("Error");
+            }
+        }
     }
     return Monom(coeff, vars);
 }
 
+//It wait new version gcc for TREVIS
+/*
 bool PolynomsCalculator::checkCorrectPolynoms(const std::string& str) {
     const std::regex reg_str("([+,-]?(([0-9]+.[0-9]+)?([a-z]\\^-?[0-9]+|[a-z])+|([0-9]+.[0-9]+)?))+");
     return std::regex_match(str, reg_str);
 };
-
+*/
 bool PolynomsCalculator::checkOperation(const std::string& str) {
     if (str == "+" || str == "-" || str == "*") {
         return true;
@@ -57,7 +64,7 @@ bool PolynomsCalculator::checkOperation(const std::string& str) {
     return false;
 };
 
-std::vector<Monom> PolynomsCalculator::parsePolynom( const std::string& str) {
+std::vector<Monom> PolynomsCalculator::parsePolynom(const std::string& str) {
 
     std::vector<Monom> resm;
     std::string str1 = str.substr(0, str.length());
@@ -79,6 +86,31 @@ std::string PolynomsCalculator::preprocessing(const std::string& str) {
     std::string str1 = str.substr(0, str.length());
 
     for (std::size_t i = 0; i < (str1.length() - 1); i++) {
+        if (!(isalpha(str1[i]) || isdigit(str1[i]) || str1[i] == '^' ||
+            str1[i] == '.' || str1[i] == '+' || str1[i] == '-')){
+            throw std::invalid_argument("Error");
+        }
+        else {
+            if (str1[i] == '^') {
+                if (i == 0) {
+                    throw std::invalid_argument("Error");
+                }else {
+                    if (!isalpha(str1[i - 1])) {
+                        throw std::invalid_argument("Error");
+                    }
+                }
+            }
+            if (str1[i] == '.') {
+                if (i == 0) {
+                    throw std::invalid_argument("Error");
+                }else {
+                    if (!(isdigit(str1[i - 1]) && isdigit(str1[i + 1]))) {
+                        throw std::invalid_argument("Error");
+                    }
+                }
+
+            }
+        }
         if (isalpha(str1[i]) && (isalpha(str1[i + 1]) || str1[i + 1] == '+' || str1[i + 1] == '-')) {
             str1.insert(i+1, "^1");
         }
@@ -90,20 +122,26 @@ std::string PolynomsCalculator::preprocessing(const std::string& str) {
 };
 
 std::string PolynomsCalculator::calculate(const std::string& arg1,const std::string& arg2,const std::string& operation) {
-    Polynom pol1(parsePolynom(preprocessing(arg1)));
-    Polynom pol2(parsePolynom(preprocessing(arg2)));
-    std::string op = operation;
+    try {
+            Polynom pol1(parsePolynom(preprocessing(arg1)));
+            Polynom pol2(parsePolynom(preprocessing(arg2)));
+    
+            std::string op = operation;
 
-    if (op == "+") {
-        return (pol1 + pol2).ToString();
+            if (op == "+") {
+                return (pol1 + pol2).ToString();
+            }
+            if (op == "-") {
+                return (pol1 - pol2).ToString();
+            }
+            if (op == "*") {
+                return (pol1 * pol2).ToString();
+            }
+            return "Error";
     }
-    if (op == "-") {
-        return (pol1 - pol2).ToString();
+    catch (std::invalid_argument e) {
+        return "Error";
     }
-    if (op == "*") {
-        return (pol1 * pol2).ToString();
-    }
-    return "";
 }
 
 std::string PolynomsCalculator::operator()(int argc, const char** argv) {
@@ -116,10 +154,12 @@ std::string PolynomsCalculator::operator()(int argc, const char** argv) {
     arg.arg2 = argv[1];
     arg.operation = argv[2];
    
-    if (checkCorrectPolynoms(arg.arg1) && checkCorrectPolynoms(arg.arg2) && checkOperation(arg.operation)) {
+    //std::regex
+    if (/*checkCorrectPolynoms(arg.arg1) && checkCorrectPolynoms(arg.arg2) &&*/ checkOperation(arg.operation)) {
         return calculate(arg.arg1, arg.arg2, arg.operation);
     }else {
         return "Incorrect input.";
     }
 };
+
 

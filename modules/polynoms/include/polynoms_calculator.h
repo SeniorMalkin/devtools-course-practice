@@ -16,7 +16,8 @@ class PolynomsCalculator {
     std::string calculate(const std::string& arg1,const std::string& arg2,const std::string& op);
  private:
     std::string Info();
-    bool checkCorrectPolynoms(const std::string& str);
+    //Wait support std::regex and new configuration for environment of Linux
+    //bool checkCorrectPolynoms(const std::string& str);
     bool checkOperation(const std::string& str);
     std::string preprocessing(const std::string& str);
     Monom createMonom(const std::string& str);

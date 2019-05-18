@@ -580,9 +580,89 @@ TEST(PolynomTest, Check_Brackets_Operator_Correct) {
 TEST(PolynomTest, Check_Brackets_Operator_Incorrect) {
     // Arrange
     PolynomsCalculator calc;
-    std::string p = "Incorrect input.";
+    std::string p = "Error";
     std::vector<const char*> v;
     v.push_back("3.0x^2%^*");
+    v.push_back("3.0y-3.0z");
+    v.push_back("*");
+
+    // Act
+    std::string res = calc(3, &v.front());
+
+    // Assert
+    EXPECT_EQ(p, res);
+}
+
+TEST(PolynomTest, Check_Brackets_Operator_Incorrect_1) {
+    // Arrange
+    PolynomsCalculator calc;
+    std::string p = "Error";
+    std::vector<const char*> v;
+    v.push_back("3.0x^y10*");
+    v.push_back("3.0y-3.0z");
+    v.push_back("*");
+
+    // Act
+    std::string res = calc(3, &v.front());
+
+    // Assert
+    EXPECT_EQ(p, res);
+}
+
+TEST(PolynomTest, Check_Brackets_Operator_Incorrect_2) {
+    // Arrange
+    PolynomsCalculator calc;
+    std::string p = "Error";
+    std::vector<const char*> v;
+    v.push_back("^3.0x^5y^10");
+    v.push_back("3.0y-3.0z");
+    v.push_back("*");
+
+    // Act
+    std::string res = calc(3, &v.front());
+
+    // Assert
+    EXPECT_EQ(p, res);
+}
+
+TEST(PolynomTest, Check_Brackets_Operator_Incorrect_3) {
+    // Arrange
+    PolynomsCalculator calc;
+    std::string p = "Error";
+    std::vector<const char*> v;
+    v.push_back("3.0^5y^10");
+    v.push_back("3.0y-3.0z");
+    v.push_back("*");
+
+    // Act
+    std::string res = calc(3, &v.front());
+
+    // Assert
+    EXPECT_EQ(p, res);
+}
+
+TEST(PolynomTest, Check_Brackets_Operator_Incorrect_4) {
+    // Arrange
+    PolynomsCalculator calc;
+    std::string p = "Error";
+    std::vector<const char*> v;
+    v.push_back(".3.0x^5y^10");
+    v.push_back("3.0y-3.0z");
+    v.push_back("*");
+
+    // Act
+    std::string res = calc(3, &v.front());
+
+    // Assert
+    EXPECT_EQ(p, res);
+}
+
+TEST(PolynomTest, Check_Brackets_Operator_Incorrect_5) {
+    // Arrange
+    PolynomsCalculator calc;
+    std::string p = "Error";
+    std::vector<const char*> v;
+    v.push_back("3.0x^5z.y^10");
     v.push_back("3.0y-3.0z");
     v.push_back("*");
 
